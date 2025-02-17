@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - Smart Translator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #6a5acd;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #eee;
+      padding: 10px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      margin: 0 15px;
+      font-size: 1.2rem;
+    }
+    nav a:hover {
+      color: #6a5acd;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    .intro {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .intro h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .intro p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    /* Timeline Styles */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: auto;
+    }
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: #6a5acd;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+    .timeline-entry {
+      padding: 20px 30px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 0.8s forwards;
+    }
+    .timeline-entry.left {
+      left: 0;
+      animation-delay: 0.3s;
+    }
+    .timeline-entry.right {
+      left: 50%;
+      animation-delay: 0.6s;
+    }
+    .timeline-entry::after {
+      content: ' ';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -13px;
+      background-color: white;
+      border: 4px solid #6a5acd;
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .timeline-entry.right::after {
+      left: -13px;
+    }
+    .timeline-entry .date {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #6a5acd;
+    }
+    .timeline-entry .content {
+      padding: 20px;
+      background: #f4f4f4;
+      border-radius: 6px;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #eee;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About Smart Translator</h1>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about_us.html">About Us</a>
+  </nav>
+  <div class="container">
+    <div class="intro">
+      <h2>Hi, I'm Om Tiwari!</h2>
+      <p>
+        I am a passionate Class 10th D student who loves technology and languages. I developed Smart Translator to break language barriers and make communication more accessible for everyone. Through this project, I aim to simplify translation, help others connect, and inspire innovation.
+      </p>
+    </div>
+    <h2 style="text-align: center; color: #6a5acd;">Project Journey Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-entry left">
+        <div class="content">
+          <div class="date">Late December 2024</div>
+          <p>
+            <strong>Research & Planning:</strong> Explored various translation APIs, drafted initial wireframes, and set the foundation for a user-friendly interface.
+          </p>
+        </div>
+      </div>
+      <div class="timeline-entry right">
+        <div class="content">
+          <div class="date">Early January 2025</div>
+          <p>
+            <strong>Development Phase:</strong> Started building the translator using HTML, CSS, and JavaScript. Integrated design elements such as flag icons and dark mode.
+          </p>
+        </div>
+      </div>
+      <div class="timeline-entry left">
+        <div class="content">
+          <div class="date">Mid-January 2025</div>
+          <p>
+            <strong>Integration & Testing:</strong> Added interactive features like speech-to-text and text-to-speech. Tested extensively and refined the user interface based on feedback.
+          </p>
+        </div>
+      </div>
+      <div class="timeline-entry right">
+        <div class="content">
+          <div class="date">Third Week of January 2025</div>
+          <p>
+            <strong>Finalization & Launch:</strong> Polished the final version, incorporated innovative features, and launched Smart Translator alongside this About Us page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2025 Om Tiwari. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
