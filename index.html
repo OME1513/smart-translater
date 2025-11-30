@@ -8,7 +8,7 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background-color: #f4f4f4;
+      background-color: #b6afcf;
       margin: 0;
       padding: 20px;
       transition: background-color 0.3s, color 0.3s;
@@ -16,10 +16,16 @@
     .container {
       max-width: 600px;
       margin: auto;
-      background: white;
+      background: rgb(214, 204, 224);
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      display: flexbox;
+      
+    }
+    .container:hover {
+      transition: ease 0.3s;
+      transform: scale(1.015);
     }
     h1 {
       margin-bottom: 20px;
@@ -39,19 +45,35 @@
       margin-top: 20px;
     }
     textarea {
-      width: 100%;
+      width: 90%;
       height: 100px;
-      margin: 5px 1em 5px -1em;
+      margin: 5px 1em 5px 1em;
       padding: 10px;
-      border: 1px solid #ccc;
+      border: 3px solid #b699c7;
       border-radius: 6px;
       resize: vertical;
-    
+      background-color: #e2dce7;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: #6a5acd;
+      box-shadow: 0 0 5px rgba(106, 90, 205, 0.5);
+      transition: ease-in 0.3s;
+      transform: scale(1.015);
     }
     select {
-      padding: 8px;
+      padding: 8px 10px 8px 10px;
       border-radius: 6px;
-      margin-right: 5px;
+      margin-left: 5px;
+      border: 2px solid #ac8ac7;
+      background-color: rgb(214, 204, 224)
+    }
+    select:focus {
+      outline: none;
+      border-color: #6a5acd;
+      box-shadow: 0 0 5px rgba(106, 90, 205, 0.5);
+      transition: ease-in 0.3s;
+      transform: scale(1.015);
     }
     button {
       margin: 5px;
@@ -59,7 +81,7 @@
       border: none;
       border-radius: 6px;
       background-color: #6a5acd;
-      color: white;
+      color: rgb(255, 255, 255);
       cursor: pointer;
       transition: background-color 0.3s;
     }
@@ -78,7 +100,7 @@
       margin-left: 10px;
     }
     #savedTranslations p {
-      background: #e0e0e0;
+      background: #424040;
       padding: 8px;
       border-radius: 4px;
       margin: 5px 0;
@@ -89,12 +111,22 @@
       color: #eee;
     }
     .dark-mode .container {
-      background: #333;
+      background: #3f3d3d;
       color: #eee;
     }
+    .dark-mode .container:hover {
+      transform: scale(1.015);
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    }
     .dark-mode textarea {
-        background-color: #2e2626;
+        background-color: #423e3e;
+        border-color: #666363;
     } 
+    .dark-mode select {
+      background-color: #5a5757;
+      color: #eee;
+      border-color: #777474;
+    }
   </style>
 </head>
 <body>
@@ -234,6 +266,7 @@
   </script>
 </body>
 </html>
+
 
 
 
