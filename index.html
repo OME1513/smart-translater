@@ -1,274 +1,531 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Translator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #b6afcf;
-      margin: 0;
-      padding: 20px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: rgb(214, 204, 224);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      display: flexbox;
-      
-    }
-    .container:hover {
-      transition: ease 0.3s;
-      transform: scale(1.015);
-    }
-    h1 {
-      margin-bottom: 20px;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    nav a {
-      text-decoration: none;
-      color: #6a5acd;
-      font-weight: bold;
-    }
-    .translator {
-      margin-top: 20px;
-    }
-    textarea {
-      width: 90%;
-      height: 100px;
-      margin: 5px 1em 5px 1em;
-      padding: 10px;
-      border: 3px solid #b699c7;
-      border-radius: 6px;
-      resize: vertical;
-      background-color: #e2dce7;
-    }
-    textarea:focus {
-      outline: none;
-      border-color: #6a5acd;
-      box-shadow: 0 0 5px rgba(106, 90, 205, 0.5);
-      transition: ease-in 0.3s;
-      transform: scale(1.015);
-    }
-    select {
-      padding: 8px 10px 8px 10px;
-      border-radius: 6px;
-      margin-left: 5px;
-      border: 2px solid #ac8ac7;
-      background-color: rgb(214, 204, 224)
-    }
-    select:focus {
-      outline: none;
-      border-color: #6a5acd;
-      box-shadow: 0 0 5px rgba(106, 90, 205, 0.5);
-      transition: ease-in 0.3s;
-      transform: scale(1.015);
-    }
-    button {
-      margin: 5px;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 6px;
-      background-color: #6a5acd;
-      color: rgb(255, 255, 255);
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: #5a4cbf;
-    }
-    .language-select {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px;
-    }
-    .language-select img {
-      width: 30px;
-      height: 20px;
-      margin-left: 10px;
-    }
-    #savedTranslations p {
-      background: #424040;
-      padding: 8px;
-      border-radius: 4px;
-      margin: 5px 0;
-      text-align: left;
-    }
-    .dark-mode {
-      background-color: #222;
-      color: #eee;
-    }
-    .dark-mode .container {
-      background: #3f3d3d;
-      color: #eee;
-    }
-    .dark-mode .container:hover {
-      transform: scale(1.015);
-      box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-    }
-    .dark-mode textarea {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Translator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #b6afcf;
+        margin: 0;
+        padding: 20px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        background: rgb(214, 204, 224);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        display: flexbox;
+      }
+      .container:hover {
+        transition: ease 0.3s;
+        transform: scale(1.015);
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+      nav a {
+        text-decoration: none;
+        color: #6a5acd;
+        font-weight: bold;
+      }
+      .translator {
+        margin-top: 20px;
+      }
+      textarea {
+        width: 90%;
+        height: 100px;
+        margin: 5px 1em 5px 1em;
+        padding: 10px;
+        border: 3px solid #b699c7;
+        border-radius: 6px;
+        resize: vertical;
+        background-color: #e2dce7;
+      }
+      textarea:focus {
+        outline: none;
+        border-color: #6a5acd;
+        box-shadow: 0 0 5px rgba(106, 90, 205, 0.5);
+        transition: ease-in 0.3s;
+        transform: scale(1.015);
+      }
+      select {
+        padding: 8px 10px 8px 10px;
+        border-radius: 6px;
+        margin-left: 5px;
+        border: 2px solid #ac8ac7;
+        background-color: rgb(214, 204, 224);
+      }
+      select:focus {
+        outline: none;
+        border-color: #6a5acd;
+        box-shadow: 0 0 5px rgba(106, 90, 205, 0.5);
+        transition: ease-in 0.3s;
+        transform: scale(1.015);
+      }
+      button {
+        margin: 5px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 6px;
+        background-color: #6a5acd;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #5a4cbf;
+      }
+      .language-select {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+      .language-select img {
+        width: 30px;
+        height: 20px;
+        margin-left: 10px;
+      }
+      #savedTranslations p {
+        background: #424040;
+        padding: 8px;
+        border-radius: 4px;
+        margin: 5px 0;
+        text-align: left;
+      }
+      .dark-mode {
+        background-color: #222;
+        color: #eee;
+      }
+      .dark-mode .container {
+        background: #3f3d3d;
+        color: #eee;
+      }
+      .dark-mode .container:hover {
+        transform: scale(1.015);
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+      }
+      .dark-mode textarea {
         background-color: #423e3e;
         border-color: #666363;
-    } 
-    .dark-mode select {
-      background-color: #5a5757;
-      color: #eee;
-      border-color: #777474;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about_us.html">About Us</a>
-    </nav>
-    <h1>🌍 Smart Translator</h1>
-    <button id="themeToggle">🌙 Dark Mode</button>
+      }
+      .dark-mode select {
+        background-color: #5a5757;
+        color: #eee;
+        border-color: #777474;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about_us.html">About Us</a>
+      </nav>
+      <h1>🌍 Smart Translator</h1>
+      <button id="themeToggle">🌙 Dark Mode</button>
 
-    <div class="translator">
-      <div class="language-select">
-        <label for="fromLang">From:</label>
-        <select id="fromLang"></select>
-        
+      <div class="translator">
+        <div class="language-select">
+          <label for="fromLang">From:</label>
+          <select id="fromLang"></select>
+        </div>
+
+        <textarea id="inputText" placeholder="Type or speak here..."></textarea>
+        <div>
+          <button onclick="speakText('inputText')">🔊</button>
+          <button onclick="startSpeechRecognition()">🎤</button>
+        </div>
+
+        <div class="language-select">
+          <label for="toLang">To:</label>
+          <select id="toLang"></select>
+        </div>
+
+        <textarea
+          id="outputText"
+          placeholder="Translation will appear here..."
+          readonly
+        ></textarea>
+        <div>
+          <button onclick="speakText('outputText')">🔊</button>
+          <button onclick="copyText()">📋 Copy</button>
+          <button onclick="saveTranslation()">💾 Save</button>
+        </div>
+
+        <button id="translateBtn">Translate</button>
       </div>
 
-      <textarea id="inputText" placeholder="Type or speak here..."></textarea>
-      <div>
-        <button onclick="speakText('inputText')">🔊</button>
-        <button onclick="startSpeechRecognition()">🎤</button>
-      </div>
-
-      <div class="language-select">
-        <label for="toLang">To:</label>
-        <select id="toLang"></select>
-       
-      </div>
-
-      <textarea id="outputText" placeholder="Translation will appear here..." readonly></textarea>
-      <div>
-        <button onclick="speakText('outputText')">🔊</button>
-        <button onclick="copyText()">📋 Copy</button>
-        <button onclick="saveTranslation()">💾 Save</button>
-      </div>
-
-      <button id="translateBtn">Translate</button>
+      <div id="savedTranslations"></div>
     </div>
 
-    <div id="savedTranslations"></div>
-  </div>
-
-  <script>
-    const languages = {
-      en: "English",
-      es: "Spanish",
-      fr: "French",
-      de: "German",
-      hi: "Hindi",
-      zh: "Chinese",
-      ar: "Arabic",
-      ja: "Japanese",
-      ru: "Russian",
-      sa: "Sanskrit",
-    };
-
-    function populateLanguageDropdowns() {
-      const fromSelect = document.getElementById("fromLang");
-      const toSelect = document.getElementById("toLang");
-
-      for (let code in languages) {
-        const optionFrom = document.createElement("option");
-        optionFrom.value = code;
-        optionFrom.textContent = languages[code];
-        fromSelect.appendChild(optionFrom);
-
-        const optionTo = document.createElement("option");
-        optionTo.value = code;
-        optionTo.textContent = languages[code];
-        toSelect.appendChild(optionTo);
-      }
-      // Set default languages
-      fromSelect.value = "en";
-      toSelect.value = "es";
-    }
-
-    function translateText() {
-      const inputText = document.getElementById("inputText").value;
-      const fromLang = document.getElementById("fromLang").value;
-      const toLang = document.getElementById("toLang").value;
-
-      // Using MyMemory Translation API for demonstration
-      fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(inputText)}&langpair=${fromLang}|${toLang}`)
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById("outputText").value = data.responseData.translatedText;
-        });
-    }
-
-    function speakText(elementId) {
-      const text = document.getElementById(elementId).value;
-      const utterance = new SpeechSynthesisUtterance(text);
-      speechSynthesis.speak(utterance);
-    }
-
-    function startSpeechRecognition() {
-      // Browser compatibility check
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        alert("Speech recognition not supported in this browser.");
-        return;
-      }
-      const recognition = new SpeechRecognition();
-      recognition.lang = document.getElementById("fromLang").value;
-      recognition.start();
-      recognition.onresult = event => {
-        document.getElementById("inputText").value = event.results[0][0].transcript;
+    <script>
+      const languages = {
+        ab: "Abkhaz",
+        ace: "Acehnese",
+        ach: "Acholi",
+        aa: "Afar",
+        af: "Afrikaans",
+        sq: "Albanian",
+        alz: "Alur",
+        am: "Amharic",
+        ar: "Arabic",
+        hy: "Armenian",
+        as: "Assamese",
+        av: "Avar",
+        awa: "Awadhi",
+        ay: "Aymara",
+        az: "Azerbaijani",
+        ban: "Balinese",
+        bal: "Baluchi",
+        bm: "Bambara",
+        bci: "Baoulé",
+        ba: "Bashkir",
+        eu: "Basque",
+        btx: "Batak Karo",
+        bts: "Batak Simalungun",
+        bbc: "Batak Toba",
+        be: "Belarusian",
+        bem: "Bemba",
+        bn: "Bengali",
+        bew: "Betawi",
+        bho: "Bhojpuri",
+        bik: "Bikol",
+        bs: "Bosnian",
+        br: "Breton",
+        bg: "Bulgarian",
+        bua: "Buryat",
+        yue: "Cantonese",
+        ca: "Catalan",
+        ceb: "Cebuano",
+        ch: "Chamorro",
+        ce: "Chechen",
+        ny: "Chichewa",
+        "zh-CN": "Chinese (Simplified)",
+        "zh-TW": "Chinese (Traditional)",
+        chk: "Chuukese",
+        cv: "Chuvash",
+        co: "Corsican",
+        crh: "Crimean Tatar",
+        hr: "Croatian",
+        cs: "Czech",
+        da: "Danish",
+        "fa-AF": "Dari",
+        dv: "Dhivehi",
+        din: "Dinka",
+        doi: "Dogri",
+        dov: "Dombe",
+        nl: "Dutch",
+        dyu: "Dyula",
+        dz: "Dzongkha",
+        en: "English",
+        eo: "Esperanto",
+        et: "Estonian",
+        ee: "Ewe",
+        fo: "Faroese",
+        fj: "Fijian",
+        tl: "Filipino",
+        fi: "Finnish",
+        fon: "Fon",
+        fr: "French",
+        fy: "Frisian",
+        fur: "Friulian",
+        ff: "Fulani",
+        gaa: "Ga",
+        gl: "Galician",
+        ka: "Georgian",
+        de: "German",
+        el: "Greek",
+        gn: "Guarani",
+        gu: "Gujarati",
+        ht: "Haitian Creole",
+        cnh: "Hakha Chin",
+        ha: "Hausa",
+        haw: "Hawaiian",
+        iw: "Hebrew",
+        hil: "Hiligaynon",
+        hi: "Hindi",
+        hmn: "Hmong",
+        hu: "Hungarian",
+        hrx: "Hunsrik",
+        iba: "Iban",
+        is: "Icelandic",
+        ig: "Igbo",
+        ilo: "Ilocano",
+        id: "Indonesian",
+        ga: "Irish",
+        it: "Italian",
+        jam: "Jamaican Patois",
+        ja: "Japanese",
+        jw: "Javanese",
+        kac: "Jingpo",
+        kl: "Kalaallisut",
+        kn: "Kannada",
+        kr: "Kanuri",
+        pam: "Kapampangan",
+        kk: "Kazakh",
+        kha: "Khasi",
+        km: "Khmer",
+        cgg: "Kiga",
+        kg: "Kikongo",
+        rw: "Kinyarwanda",
+        ktu: "Kituba",
+        trp: "Kokborok",
+        kv: "Komi",
+        gom: "Konkani",
+        ko: "Korean",
+        kri: "Krio",
+        ku: "Kurdish (Kurmanji)",
+        ckb: "Kurdish (Sorani)",
+        ky: "Kyrgyz",
+        lo: "Lao",
+        ltg: "Latgalian",
+        la: "Latin",
+        lv: "Latvian",
+        lij: "Ligurian",
+        li: "Limburgish",
+        ln: "Lingala",
+        lt: "Lithuanian",
+        lmo: "Lombard",
+        lg: "Luganda",
+        luo: "Luo",
+        lb: "Luxembourgish",
+        mk: "Macedonian",
+        mad: "Madurese",
+        mai: "Maithili",
+        mak: "Makassar",
+        mg: "Malagasy",
+        ms: "Malay",
+        "ms-Arab": "Malay (Jawi)",
+        ml: "Malayalam",
+        mt: "Maltese",
+        mam: "Mam",
+        gv: "Manx",
+        mi: "Maori",
+        mr: "Marathi",
+        mh: "Marshallese",
+        mwr: "Marwadi",
+        mfe: "Mauritian Creole",
+        chm: "Meadow Mari",
+        "mni-Mtei": "Meiteilon (Manipuri)",
+        min: "Minang",
+        lus: "Mizo",
+        mn: "Mongolian",
+        my: "Myanmar (Burmese)",
+        "nhe": "Nahuatl (Eastern Huasteca)",
+        "ndc-ZW": "Ndau",
+        nr: "Ndebele (South)",
+        new: "Nepalbhasa (Newari)",
+        ne: "Nepali",
+        "bm-Nkoo": "NKo",
+        no: "Norwegian",
+        nus: "Nuer",
+        oc: "Occitan",
+        or: "Odia (Oriya)",
+        om: "Oromo",
+        os: "Ossetian",
+        pag: "Pangasinan",
+        pap: "Papiamento",
+        ps: "Pashto",
+        fa: "Persian",
+        pl: "Polish",
+        pt: "Portuguese (Brazil)",
+        "pt-PT": "Portuguese (Portugal)",
+        pa: "Punjabi (Gurmukhi)",
+        "pa-Arab": "Punjabi (Shahmukhi)",
+        qu: "Quechua",
+        kek: "Qʼeqchiʼ",
+        rom: "Romani",
+        ro: "Romanian",
+        rn: "Rundi",
+        ru: "Russian",
+        se: "Sami (North)",
+        sm: "Samoan",
+        sg: "Sango",
+        sa: "Sanskrit",
+        "sat-Latn": "Santali",
+        gd: "Scots Gaelic",
+        nso: "Sepedi",
+        sr: "Serbian",
+        st: "Sesotho",
+        crs: "Seychellois Creole",
+        shn: "Shan",
+        sn: "Shona",
+        scn: "Sicilian",
+        szl: "Silesian",
+        sd: "Sindhi",
+        si: "Sinhala",
+        sk: "Slovak",
+        sl: "Slovenian",
+        so: "Somali",
+        es: "Spanish",
+        su: "Sundanese",
+        sus: "Susu",
+        sw: "Swahili",
+        ss: "Swati",
+        sv: "Swedish",
+        ty: "Tahitian",
+        tg: "Tajik",
+        "ber-Latn": "Tamazight",
+        ber: "Tamazight (Tifinagh)",
+        ta: "Tamil",
+        tt: "Tatar",
+        te: "Telugu",
+        tet: "Tetum",
+        th: "Thai",
+        bo: "Tibetan",
+        ti: "Tigrinya",
+        tiv: "Tiv",
+        tpi: "Tok Pisin",
+        to: "Tongan",
+        ts: "Tsonga",
+        tn: "Tswana",
+        tcy: "Tulu",
+        tum: "Tumbuka",
+        tr: "Turkish",
+        tk: "Turkmen",
+        tyv: "Tuvan",
+        ak: "Twi",
+        udm: "Udmurt",
+        uk: "Ukrainian",
+        ur: "Urdu",
+        ug: "Uyghur",
+        uz: "Uzbek",
+        ve: "Venda",
+        vec: "Venetian",
+        vi: "Vietnamese",
+        war: "Waray",
+        cy: "Welsh",
+        wo: "Wolof",
+        xh: "Xhosa",
+        sah: "Yakut",
+        yi: "Yiddish",
+        yo: "Yoruba",
+        yua: "Yucatec Maya",
+        zap: "Zapotec",
+        zu: "Zulu"
       };
-    }
 
-    function copyText() {
-      const outputText = document.getElementById("outputText");
-      outputText.select();
-      document.execCommand("copy");
-      alert("Translation copied!");
-    }
+      function populateLanguageDropdowns() {
+        const fromSelect = document.getElementById("fromLang");
+        const toSelect = document.getElementById("toLang");
 
-    function saveTranslation() {
-      const savedDiv = document.getElementById("savedTranslations");
-      const newEntry = document.createElement("p");
-      newEntry.textContent = document.getElementById("outputText").value;
-      savedDiv.appendChild(newEntry);
-    }
+        for (let code in languages) {
+          const optionFrom = document.createElement("option");
+          optionFrom.value = code;
+          optionFrom.textContent = languages[code];
+          fromSelect.appendChild(optionFrom);
 
-    function toggleTheme() {
-      document.body.classList.toggle("dark-mode");
-      const themeBtn = document.getElementById("themeToggle");
-      themeBtn.textContent = document.body.classList.contains("dark-mode")
-        ? "☀️ Light Mode"
-        : "🌙 Dark Mode";
-    }
+          const optionTo = document.createElement("option");
+          optionTo.value = code;
+          optionTo.textContent = languages[code];
+          toSelect.appendChild(optionTo);
+        }
+        // Set default languages
+        fromSelect.value = "en";
+        toSelect.value = "es";
+      }
 
-    document.getElementById("translateBtn").addEventListener("click", translateText);
-    document.getElementById("themeToggle").addEventListener("click", toggleTheme);
-    populateLanguageDropdowns();
-  </script>
-</body>
+      function translateText() {
+        const inputText = document.getElementById("inputText").value;
+        const fromLang = document.getElementById("fromLang").value;
+        const toLang = document.getElementById("toLang").value;
+
+        if (!inputText.trim()) {
+          alert("Please enter text to translate.");
+          return;
+        }
+
+        // Using MyMemory Translation API
+        fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(inputText)}&langpair=${fromLang}|${toLang}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.responseData && data.responseData.translatedText) {
+              document.getElementById("outputText").value = data.responseData.translatedText;
+            } else {
+              document.getElementById("outputText").value = "Translation failed. Please try again.";
+            }
+          })
+          .catch(error => {
+            console.error("Translation error:", error);
+            document.getElementById("outputText").value = "Error: Unable to translate. Please check your internet connection.";
+          });
+      }
+
+      function speakText(elementId) {
+        const text = document.getElementById(elementId).value;
+        if (!text.trim()) {
+          alert("No text to speak.");
+          return;
+        }
+        const utterance = new SpeechSynthesisUtterance(text);
+        speechSynthesis.speak(utterance);
+      }
+
+      function startSpeechRecognition() {
+        // Browser compatibility check
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+          alert("Speech recognition not supported in this browser.");
+          return;
+        }
+        const recognition = new SpeechRecognition();
+        recognition.lang = document.getElementById("fromLang").value;
+        recognition.start();
+        recognition.onresult = event => {
+          document.getElementById("inputText").value = event.results[0][0].transcript;
+        };
+        recognition.onerror = event => {
+          alert("Speech recognition error: " + event.error);
+        };
+      }
+
+      function copyText() {
+        const outputText = document.getElementById("outputText");
+        if (!outputText.value.trim()) {
+          alert("No text to copy.");
+          return;
+        }
+        outputText.select();
+        document.execCommand("copy");
+        alert("Translation copied!");
+      }
+
+      function saveTranslation() {
+        const outputText = document.getElementById("outputText").value;
+        if (!outputText.trim()) {
+          alert("No translation to save.");
+          return;
+        }
+        const savedDiv = document.getElementById("savedTranslations");
+        const newEntry = document.createElement("p");
+        newEntry.textContent = outputText;
+        savedDiv.appendChild(newEntry);
+      }
+
+      function toggleTheme() {
+        document.body.classList.toggle("dark-mode");
+        const themeBtn = document.getElementById("themeToggle");
+        themeBtn.textContent = document.body.classList.contains("dark-mode")
+          ? "☀️ Light Mode"
+          : "🌙 Dark Mode";
+      }
+
+      document.getElementById("translateBtn").addEventListener("click", translateText);
+      document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+      populateLanguageDropdowns();
+    </script>
+  </body>
 </html>
-
-
-
-
-
-
